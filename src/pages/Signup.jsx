@@ -6,6 +6,7 @@ import { auth, googleProvider } from "../config/firebase";
 import { AuthContext } from "../App";
 import toast from "react-hot-toast";
 import { validatePassword } from "../utils/passwordValidation";
+import API_URL from "../config/api";
 import "./Auth.css";
 
 const Signup = () => {
@@ -47,7 +48,7 @@ const Signup = () => {
     const loadingToast = toast.loading("Sending OTP...");
 
     try {
-      const response = await fetch("http://localhost:5000/api/users/send-otp", {
+      const response = await fetch(`${API_URL}/api/users/send-otp`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -103,7 +104,7 @@ const Signup = () => {
     const loadingToast = toast.loading("Verifying OTP...");
 
     try {
-      const response = await fetch("http://localhost:5000/api/users/verify-otp", {
+      const response = await fetch(`${API_URL}/api/users/verify-otp`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -152,7 +153,7 @@ const Signup = () => {
     const loadingToast = toast.loading("Resending OTP...");
 
     try {
-      const response = await fetch("http://localhost:5000/api/users/send-otp", {
+      const response = await fetch(`${API_URL}/api/users/send-otp`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -190,7 +191,7 @@ const Signup = () => {
       const result = await signInWithPopup(auth, provider);
       const user = result.user;
 
-      const response = await fetch("http://localhost:5000/api/users/social-auth", {
+      const response = await fetch(`${API_URL}/api/users/social-auth`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
