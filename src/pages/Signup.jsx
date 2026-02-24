@@ -19,7 +19,6 @@ const Signup = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const [otpSent, setOtpSent] = useState(false);
-  const [devOTP, setDevOTP] = useState("");
   const [passwordErrors, setPasswordErrors] = useState([]);
 
   const { setUser } = useContext(AuthContext);
@@ -69,13 +68,7 @@ const Signup = () => {
         return;
       }
 
-      if (data.devMode && data.otp) {
-        setDevOTP(data.otp);
-        toast.success(`OTP generated! Check below.`, { duration: 8000 });
-      } else {
-        toast.success("OTP sent to your email!");
-        setDevOTP("");
-      }
+      toast.success("OTP sent to your email! Please check your inbox.");
       
       setOtpSent(true);
       setStep(2);
@@ -404,32 +397,6 @@ const Signup = () => {
                 <h2>Verify OTP</h2>
                 <p className="auth-subtitle">Enter the 6-digit OTP sent to {email}</p>
 
-                {devOTP && (
-                  <div style={{
-                    background: '#fff3cd',
-                    border: '2px solid #ffc107',
-                    borderRadius: '8px',
-                    padding: '16px',
-                    marginBottom: '20px',
-                    textAlign: 'center'
-                  }}>
-                    <p style={{ margin: '0 0 8px 0', color: '#856404', fontSize: '14px' }}>
-                      <strong>Development Mode:</strong> OTP not sent via email
-                    </p>
-                    <div style={{
-                      fontSize: '32px',
-                      fontWeight: 'bold',
-                      color: '#1B6B3A',
-                      letterSpacing: '8px',
-                      fontFamily: 'monospace'
-                    }}>
-                      {devOTP}
-                    </div>
-                    <p style={{ margin: '8px 0 0 0', color: '#856404', fontSize: '12px' }}>
-                      Use this OTP to verify
-                    </p>
-                  </div>
-                )}
 
                 <form onSubmit={handleVerifyOTP} className="auth-form">
                   <div className="form-group">
